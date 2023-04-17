@@ -33,7 +33,7 @@ const auth = async (req, res, next) =>{
     }
 
     if(token){
-        const decoded=jwt.verify(token,"masai")
+        const decoded=jwt.verify(token,"sahil")
         if(decoded){
             req.body.userID = decoded.userID
             next()

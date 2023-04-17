@@ -6,7 +6,6 @@ const blogSchema = mongoose.Schema({
     email:String,
     postnumber:Number,
     comment:String,
-    
     age:Number
 },{
     versionKey:false

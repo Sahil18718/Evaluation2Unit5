@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt")
 
 blogRouter.get("/",async(req,res)=>{
     const token= req.headers.authorization.split(" ")[1]
-    const decoded=jwt.verify(token,"masai")
+    const decoded=jwt.verify(token,"sahil")
 
     try {
         if (decoded.userID) {
