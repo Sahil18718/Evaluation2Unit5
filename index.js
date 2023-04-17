@@ -2,7 +2,7 @@ const express = require("express")
 const cors=require("cors")
 const {connection}=require("./db")
 const {userRouter}=require("./routes/userroutes")
-
+const {auth} = require("./middileware/authenticate")
 
 require("dotenv").config()
 
@@ -13,6 +13,9 @@ app.use(cors())
 
 
 app.use("/users",userRouter)
+app.use(auth)
+
+
 
 app.get("/",(req,res)=>{
     res.send("Homepage")

@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
 const { UserModel } = require("../model/usermodel")
+const {auth} =require("../middileware/authenticate")
 
 
 
@@ -20,6 +21,9 @@ userRouter.post("/register",async(req,res)=>{
         res.status(400).send({"msg":"error.message"})
     }
 })
+
+
+// login
 
 
 module.exports={
