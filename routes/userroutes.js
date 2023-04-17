@@ -33,7 +33,7 @@ userRouter.post("/login", async(req,res)=>{
             bcrypt.compare(pass, user.pass, (err,result)=>{
                 if(result){
                     
-                    const token = jwt.sign({"userID":user._id},"masai",{expiresIn:60})
+                    const token = jwt.sign({"userID":user._id},"sahil",{expiresIn:60})
                     const refreshtoken= jwt.sign({"userID":user._id},"refresh",{expiresIn:180})
                     res.status(200).send({"msg":"Login Successful","token":token,"refresh-token":refreshtoken})
                 }else{
@@ -63,7 +63,7 @@ userRouter.get("/newtoken",(req,res)=>{
     const decoded = jwt.verify(refreshtoken,"refresh")
 
     if (decoded) {
-        const token = jwt.sign({"userID":decoded.userID},"masai",{expiresIn:60})
+        const token = jwt.sign({"userID":decoded.userID},"sahil",{expiresIn:60})
         res.status(200).send({"msg":"latest token"})
         res.status(200).send({"Token":token})
     } else {
