@@ -47,7 +47,7 @@ userRouter.post("/login", async(req,res)=>{
 })
 
 // logout
-userRouter.post("/logout",auth,async(req,res)=>{
+userRouter.get("/logout",auth,async(req,res)=>{
     const token=req.headers.authorization?.split(" ")[1]
     try {
         const data = new blacklistModel({token})
