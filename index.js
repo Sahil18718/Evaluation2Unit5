@@ -3,6 +3,7 @@ const cors=require("cors")
 const {connection}=require("./db")
 const {userRouter}=require("./routes/userroutes")
 const {auth} = require("./middileware/authenticate")
+const {blogRouter}=require("./routes/blogroutes")
 
 require("dotenv").config()
 
@@ -14,7 +15,7 @@ app.use(cors())
 
 app.use("/users",userRouter)
 app.use(auth)
-
+app.use("/blogs",blogRouter)
 
 
 app.get("/",(req,res)=>{
