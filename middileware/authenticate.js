@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken")
 const {UserModel} = require("../model/usermodel")
+const {blacklistModel} = require("../model/blacklistmodel")
 
 const auth = async (req, res, next) =>{
+    const token = req.headers.authorization.split(" ")[1]
     try {
-        const token = req.headers.authorization.split(" ")[1]
+        
         const decodedtoken = jwt.verify(token,"masai")
         const {userID}=decodedtoken;
         const user = await UserModel.findOne({_id:userID});
@@ -17,6 +19,20 @@ const auth = async (req, res, next) =>{
         res.status(400).send({"msg":"Unauthorised"})
         res.status(400).send({"msg":error.message})
     }
+
+
+    
+    try {
+        const blacklisted = await blacklistModel.find({"token":token})
+        if(blacklisted[0]){
+            return res.status(400).json({"msg":"Unauthorized"})
+        }
+    } catch (error) {
+        res.status(400).send({"msg":"blacklist"})
+        res.status(400).send({"msg":error.message})
+    }
+
+    
 }
 
 module.exports={

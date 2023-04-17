@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt")
 
 const { UserModel } = require("../model/usermodel")
 const {auth} =require("../middileware/authenticate")
+const {blacklistModel} = require("../model/blacklistmodel")
 
 
 
@@ -40,6 +41,18 @@ userRouter.post("/login", async(req,res)=>{
                 }
             })
         }
+    } catch (error) {
+        res.status(400).send({"msg":error.message})
+    }
+})
+
+// logout
+userRouter.post("/logout",auth,async(req,res)=>{
+    const token=req.headers.authorization?.split(" ")[1]
+    try {
+        const data = new blacklistModel({token})
+        await data.save()
+        res.status(200).send({"msg":"Logout Successful"})
     } catch (error) {
         res.status(400).send({"msg":error.message})
     }
