@@ -24,7 +24,26 @@ userRouter.post("/register",async(req,res)=>{
 
 
 // login
-
+userRouter.post("/login", async(req,res)=>{
+    const {email, pass} =req.body
+    try {
+        const user = await UserModel.findOne({email})
+        if(user){
+            bcrypt.compare(pass, user.pass, (err,result)=>{
+                if(result){
+                    
+                    const token = jwt.sign({"userID":user._id},"masai",{expiresIn:60})
+                    const refreshtoken= jwt.sign({"userID":user._id},"refresh",{expiresIn:180})
+                    res.status(200).send({"msg":"Login Successful","token":token,"refresh-token":refreshtoken})
+                }else{
+                    res.status(400).send({"msg":"Wrong Data"})
+                }
+            })
+        }
+    } catch (error) {
+        res.status(400).send({"msg":error.message})
+    }
+})
 
 module.exports={
     userRouter
