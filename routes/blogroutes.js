@@ -21,6 +21,29 @@ blogRouter.get("/",async(req,res)=>{
     }
 })
 
+blogRouter.post("/newblog",async(req,res)=>{
+    try {
+        const blog= new blogModel(req.body)
+        await blog.save()
+        res.status(400).send("New blog")
+        
+    }catch(error){
+        res.status(400).send({"msg":error.message})
+    }
+})
+
+
+blogRouter.patch("./update/blogID",async(req,res)=>{
+    const data=req.body;
+    const blogId=req.params.blogId;
+    try {
+        await blogModel.findByIdAndUpdate({_id:blogID},data)
+        res.status(400).send("blog deleted")
+    } catch (error) {
+        res.status(400).send({"msg":error.message})
+    }
+})
+
 module.exports={
     blogRouter
 }
