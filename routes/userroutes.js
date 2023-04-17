@@ -58,6 +58,19 @@ userRouter.get("/logout",auth,async(req,res)=>{
     }
 })
 
+userRouter.get("/newtoken",(req,res)=>{
+    const refreshtoken=req.headers.authorization?.split(" ")[1]
+    const decoded = jwt.verify(refreshtoken,"refresh")
+
+    if (decoded) {
+        const token = jwt.sign({"userID":decoded.userID},"masai",{expiresIn:60})
+        res.status(200).send({"msg":"latest token"})
+        res.status(200).send({"Token":token})
+    } else {
+        res.status(400).send({"msg":error.message})
+    }
+})
+
 module.exports={
     userRouter
 }
