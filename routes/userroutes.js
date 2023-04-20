@@ -64,7 +64,7 @@ userRouter.get("/newtoken",(req,res)=>{
 
     if (decoded) {
         const token = jwt.sign({"userID":decoded.userID},"sahil",{expiresIn:60})
-        res.status(200).send({"msg":"latest token"})
+        res.status(200).send({"msg":token})
         res.status(200).send({"Token":token})
     } else {
         res.status(400).send({"msg":error.message})
