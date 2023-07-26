@@ -21,6 +21,9 @@ app.use(auth)
 app.use("/blogs",blogRouter)
 
 
+
+
+
 app.get("/",(req,res)=>{
     res.send("Homepage")
 
