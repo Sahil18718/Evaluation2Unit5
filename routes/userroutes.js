@@ -9,7 +9,10 @@ const {blacklistModel} = require("../model/blacklistmodel")
 
 
 
-// register
+
+
+
+// register for user
 userRouter.post("/register",async(req,res)=>{
     const {email, pass, age} = req.body;
     try {
