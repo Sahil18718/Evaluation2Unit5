@@ -29,9 +29,6 @@ app.get("/",(req,res)=>{
 
 })
 
-
-
-
 app.listen(process.env.port, async()=>{
     try {
         await connection
