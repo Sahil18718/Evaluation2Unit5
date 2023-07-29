@@ -8,10 +8,6 @@ const {auth} =require("../middileware/authenticate")
 const {blacklistModel} = require("../model/blacklistmodel")
 
 
-
-
-
-
 // register for user
 userRouter.post("/register",async(req,res)=>{
     const {email, pass, age} = req.body;
