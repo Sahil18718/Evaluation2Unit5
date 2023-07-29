@@ -56,9 +56,6 @@ userRouter.get("/logout",auth,async(req,res)=>{
     }
 })
 
-
-
-
 userRouter.get("/newtoken",(req,res)=>{
     const refreshtoken=req.headers.authorization?.split(" ")[1]
     const decoded = jwt.verify(refreshtoken,"refresh")
