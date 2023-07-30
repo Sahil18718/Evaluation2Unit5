@@ -44,6 +44,11 @@ userRouter.post("/login", async(req,res)=>{
     }
 })
 
+
+
+
+
+
 // logout
 userRouter.get("/logout",auth,async(req,res)=>{
     const token=req.headers.authorization?.split(" ")[1]
